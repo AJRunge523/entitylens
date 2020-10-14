@@ -74,7 +74,7 @@ def main():
     parser.add_argument("-t", "--tasks", help="Directory containing task datasets", default="../probing-tasks")
     parser.add_argument("-o", "--output", help="Directory where probing datasets will be written ", default="../probing-datasets")
     parser.add_argument("-m", "--models", help="Comma-separated list of which embedding model(s) should be used to "
-                                               "create probing datasets. Default: All - creates a dataset for each of the 8"
+                                               "create probing datasets. Default: All - creates a dataset for each of the 8 "
                                                "models used in the paper.", default="All")
 
     args = parser.parse_args()
