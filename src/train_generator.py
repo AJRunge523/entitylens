@@ -1,3 +1,7 @@
+"""
+Combines the probing dataset labels with one or more sets of entity embeddings to create probing task datasets
+which can be used to assess the types and extent of the semantic information stored in the embeddings.
+"""
 import os
 import numpy as np
 import pickle
@@ -19,19 +23,16 @@ def generate_dataset_from_ids(dataset_dir, source, output_dir):
                         v1 = source[parts[0]]
                         if v1 is None:
                             continue
-                            # raise Exception(f"Missing embedding for entity {parts[0]}")
                         instances.append((parts[0], v1, parts[1]))
                     elif len(parts) == 3: # Pair entity probing task
                         v1 = source[parts[0]]
                         v2 = source[parts[1]]
                         if v1 is None:
                             continue
-                            # raise Exception(f"Missing embedding for entity {parts[0]}")
                         elif v2 is None:
                             continue
-                            # raise Exception(f"Missing embedding for entity {parts[1]}")
                         instances.append((parts[0], v1, parts[1], v2, parts[2]))
-                    elif len(parts) == 6: #
+                    elif len(parts) == 6: # Factual probing task with extra metadata
                         v1 = source[parts[0]]
                         v2 = source[parts[1]]
                         label = parts[2]
@@ -68,7 +69,6 @@ class TSVTextSource:
 
 
 def main():
-
     parser = argparse.ArgumentParser()
     parser.add_argument("-e", "--embeds", help="Directory containing embedding files", required=True)
     parser.add_argument("-t", "--tasks", help="Directory containing task datasets", default="../probing-tasks")
